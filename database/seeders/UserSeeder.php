@@ -20,13 +20,6 @@ class UserSeeder extends Seeder
             'status' => '1'
         ])->assignRole('Admin');
 
-        User::create([
-            'name' => 'wilson davis castillo ochoa',
-            'email' => 'cliente@gmail.com',
-            'password' => bcrypt('12345678'),
-            'status' => '1'
-        ])->assignRole('Customer');
-
         User::factory()->count(300)->create()->each(function ($user) {
             $user->assignRole('Customer');
         });;

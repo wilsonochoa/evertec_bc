@@ -1,20 +1,18 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
-import Pagination from '@/Components/Pagination.vue'
-
+import Pagination from "@/Components/Pagination.vue";
 
 defineProps({
-    users: Object,
+  users: Object,
 });
 </script>
 
 <template>
-  <Head title="Dashboard" />
+  <Head title="Listar clientes" />
   <AuthenticatedLayout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Listar Usuarios
+        Listar Clientes
       </h2>
     </template>
     <div class="py-12">
@@ -25,14 +23,24 @@ defineProps({
               <table class="table w-full">
                 <thead>
                   <tr>
-                    <th>name</th>
-                    <th>email</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Actualizar</th>
+                    <th>Estado</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="user in users.data">
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
+                    <td>
+                      <a
+                        class="btn btn-active btn-primary"
+                        :href="route('admin.update', user.id)"
+                        >Actualizar</a
+                      >
+                    </td>
+                    <td>{{ user.status }}</td>
                   </tr>
                 </tbody>
               </table>

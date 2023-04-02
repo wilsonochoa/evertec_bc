@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\AdminController;
 
 use Inertia\Inertia;
 
@@ -18,4 +16,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/lstuser', [HomeController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/lstuser', [AdminController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
+
+    Route::get('/updateuser/{user}', [AdminController::class, 'updateUser'])
+        ->name('admin.update');
+
+    Route::put('/updateuserprocess/{user}', [AdminController::class, 'updateUserProcess'])
+        ->middleware('can:admin.update')->name('admin.updateProcess');
+
+});

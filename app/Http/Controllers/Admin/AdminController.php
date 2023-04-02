@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserPostRequest;
+use App\Models\User;
+use Inertia\Inertia;
+use App\Http\Controllers\Gst\GstAdmin;
+
+class AdminController extends Controller
+{
+
+    public function index(): \Inertia\Response
+    {
+        $users = User::paginate(5);
+        return Inertia::render('Admin/Index', [
+            'users' => $users,
+        ]);
+    }
+
+    public function updateUser(User $user): \Inertia\Response
+    {
+        return Inertia::render('Admin/Update', [
+            'user' => $user
+        ]);
+    }
+
+    public function updateUserProcess(User $user, UpdateUserPostRequest $request): \Illuminate\Http\RedirectResponse
+    {
+        $data = $request->validated();
+        if (GstAdmin::updateUser($user, $data)) {
+            session()->flash('success', 'El Cliente se actualizó correctamente');
+        } else {
+            session()->flash('error', 'Se ha producido un error al actualizar el registro');
+        }
+        return redirect()->route('admin.home');
+    }
+}

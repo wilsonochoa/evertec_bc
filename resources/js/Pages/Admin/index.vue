@@ -7,7 +7,7 @@ defineProps({
 });
 
 const toggleStatus = (e) => {
-    axios.patch(route('toggleUserStatus'), {id: e.target.dataset.user}).catch((err) => {
+    axios.patch(route('admin.toggleUserStatus'), {id: e.target.dataset.user}).catch((err) => {
         console.error(err);
     });
 }

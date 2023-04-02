@@ -23,8 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/updateuser/{user}', [AdminController::class, 'updateUser'])
         ->name('admin.update');
 
-    Route::patch('/toggleUserStatus', [AdminController::class, 'toggleStatus'])
-        ->middleware('can:admin.update')->name('toggleUserStatus');
+    Route::patch('/toggleuserstatus', [AdminController::class, 'toggleStatus'])
+        ->middleware('can:admin.update')->name('admin.toggleUserStatus');
 
     Route::put('/updateuserprocess/{user}', [AdminController::class, 'updateUserProcess'])
         ->middleware('can:admin.update')->name('admin.updateProcess');

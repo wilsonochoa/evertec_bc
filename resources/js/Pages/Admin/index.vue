@@ -1,14 +1,21 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Pagination from "@/Components/Pagination.vue";
-
+import { Head } from "@inertiajs/vue3";
 defineProps({
   users: Object,
 });
+
+const toggleStatus = (e) => {
+    axios.patch(route('toggleUserStatus'), {id: e.target.dataset.user}).catch((err) => {
+        console.error(err);
+    });
+}
+
 </script>
 
 <template>
-  <Head title="Listar clientes" />
+  <Head title="Listar Clientes" />
   <AuthenticatedLayout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -40,7 +47,12 @@ defineProps({
                         >Actualizar</a
                       >
                     </td>
-                    <td>{{ user.status }}</td>
+                    <td><input type="checkbox" class="toggle toggle-success" 
+                      :data-user="user.id" 
+                      :checked="user.status === '1'" 
+                      @change="toggleStatus($event)"
+                      />
+                    </td>
                   </tr>
                 </tbody>
               </table>

@@ -15,8 +15,7 @@ class AdminTest extends TestCase
 
     public function test_dashboard_page_is_displayed(): void
     {
-        Role::create(['name' => 'Customer']);
-        $user = User::factory()->create()->assignRole('Customer');
+        $user = User::factory()->create()->assignRole('Admin');
 
         $response = $this
             ->actingAs($user)
@@ -26,14 +25,7 @@ class AdminTest extends TestCase
 
     public function test_customers_page_is_displayed(): void
     {
-        $role = Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Customer']);
-        Permission::create(['name' => 'admin.home'])->assignRole($role);
-        Permission::create(['name' => 'admin.update'])->assignRole($role);
         $user = User::factory()->create()->assignRole('Admin');
-        User::factory()->count(20)->create()->each(function ($user) {
-            $user->assignRole('Customer');
-        });
         $response = $this
             ->actingAs($user)
             ->get('/lstuser');
@@ -43,10 +35,6 @@ class AdminTest extends TestCase
 
     public function test_customers_pagination_is_displayed(): void
     {
-        $role = Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Customer']);
-        Permission::create(['name' => 'admin.home'])->assignRole($role);
-        Permission::create(['name' => 'admin.update'])->assignRole($role);
         $user = User::factory()->create()->assignRole('Admin');
         $response = $this
             ->actingAs($user)
@@ -57,25 +45,17 @@ class AdminTest extends TestCase
 
     public function test_customers_update_is_displayed(): void
     {
-        $role = Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Customer']);
-        Permission::create(['name' => 'admin.home'])->assignRole($role);
-        Permission::create(['name' => 'admin.update'])->assignRole($role);
         $userAdmin = User::factory()->create()->assignRole('Admin');
-        $userCustomer = User::factory()->create()->assignRole('Customer');
 
         $response = $this
             ->actingAs($userAdmin)
-            ->get('/updateuser/' . $userCustomer->id);
+            ->get('/updateuser/3');
 
         $response->assertStatus(200);
     }
 
     public function test_customers_update_is_displayed_failed(): void
     {
-        $role = Role::create(['name' => 'Admin']);
-        Permission::create(['name' => 'admin.home'])->assignRole($role);
-        Permission::create(['name' => 'admin.update'])->assignRole($role);
         $userAdmin = User::factory()->create()->assignRole('Admin');
 
         $response = $this
@@ -87,16 +67,11 @@ class AdminTest extends TestCase
 
     public function test_customers_toggle_status(): void
     {
-        $role = Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Customer']);
-        Permission::create(['name' => 'admin.home'])->assignRole($role);
-        Permission::create(['name' => 'admin.update'])->assignRole($role);
         $userAdmin = User::factory()->create()->assignRole('Admin');
-        $userCustomer = User::factory()->create()->assignRole('Customer');
 
         $response = $this
             ->actingAs($userAdmin)
-            ->patch('/toggleuserstatus', ['id' => $userCustomer->id]);
+            ->patch('/toggleuserstatus', ['id' => 3]);
 
         $response->assertStatus(200);
         $response->assertJson(['status' => true]);
@@ -104,10 +79,6 @@ class AdminTest extends TestCase
 
     public function test_customers_toggle_status_failed(): void
     {
-        $role = Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Customer']);
-        Permission::create(['name' => 'admin.home'])->assignRole($role);
-        Permission::create(['name' => 'admin.update'])->assignRole($role);
         $userAdmin = User::factory()->create()->assignRole('Admin');
 
         $response = $this
@@ -119,22 +90,18 @@ class AdminTest extends TestCase
 
     public function test_customers_update(): void
     {
-        $role = Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Customer']);
-        Permission::create(['name' => 'admin.home'])->assignRole($role);
-        Permission::create(['name' => 'admin.update'])->assignRole($role);
         $userAdmin = User::factory()->create()->assignRole('Admin');
-        $userCustomer = User::factory()->create()->assignRole('Customer');
+
 
         $randomName = $this->faker->name();
 
         $response = $this
             ->actingAs($userAdmin)
-            ->put('/updateuserprocess/' . $userCustomer->id, ["name" => $randomName]);
+            ->put('/updateuserprocess/3', ["name" => $randomName]);
 
         $response->assertStatus(302);
         $response->assertRedirect('/lstuser');
 
-        $this->assertEquals($randomName, User::find($userCustomer->id)->name);
+        $this->assertEquals($randomName, User::find(3)->name);
     }
 }

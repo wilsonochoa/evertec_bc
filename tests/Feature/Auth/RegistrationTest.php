@@ -3,13 +3,9 @@
 namespace Tests\Feature\Auth;
 
 use App\Providers\RouteServiceProvider;
-use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Database\Seeder;
 use Tests\TestCase;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class RegistrationTest extends TestCase
 {
@@ -24,10 +20,6 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
-        $role1 = Role::create(['name'=>'Admin']);
-        $role2 = Role::create(['name'=>'Customer']);
-        Permission::create(['name'=> 'admin.home'])->assignRole($role1);
-        Permission::create(['name'=> 'admin.update'])->assignRole($role1);
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',

@@ -17,11 +17,12 @@ class UserSeeder extends Seeder
             'name' => 'wilson davis castillo ochoa',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
-            'status' => '1'
+            'status' => '1',
+            'email_verified_at' => now(),
         ])->assignRole('Admin');
 
         User::factory()->count(300)->create()->each(function ($user) {
             $user->assignRole('Customer');
-        });;
+        });
     }
 }

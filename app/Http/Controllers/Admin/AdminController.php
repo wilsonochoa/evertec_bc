@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function index(): \Inertia\Response
     {
         $users = GstAdmin::getAllsUserPaginate();
-        return Inertia::render('Admin/Index', [
+        return Inertia::render('Admin/List', [
             'users' => $users,
         ]);
     }

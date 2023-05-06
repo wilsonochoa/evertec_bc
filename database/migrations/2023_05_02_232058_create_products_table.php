@@ -19,7 +19,6 @@ return new class extends Migration
             $table->double('price');
             $table->integer('quantity');
             $table->boolean('status');
-            $table->string('image');
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });

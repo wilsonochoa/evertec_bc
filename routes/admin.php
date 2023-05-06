@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 
 use Inertia\Inertia;
 
@@ -28,4 +29,20 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/updateuserprocess/{user}', [AdminController::class, 'updateUserProcess'])
         ->middleware('can:admin.update')->name('admin.updateProcess');
+
+    //Category
+    Route::get('/lstcategory', [CategoryController::class, 'index'])->middleware('can:admin.home')
+    ->name('category.home');
+
+    Route::get('/createcategory', [CategoryController::class, 'create'])->middleware('can:admin.home')
+    ->name('category.create');
+
+    Route::post('/categorystore', [CategoryController::class, 'store'])->middleware('can:admin.home')
+    ->name('category.store');
+
+    Route::get('/categorystore/{category}', [CategoryController::class, 'edit'])->middleware('can:admin.home')
+    ->name('category.edit');
+
+    Route::put('/categoryupdate/{category}', [CategoryController::class, 'update'])
+    ->middleware('can:admin.update')->name('category.update');
 });

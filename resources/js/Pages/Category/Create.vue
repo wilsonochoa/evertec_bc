@@ -15,9 +15,6 @@ const submit = () => {
   form.post(route("category.store"));
 };
 
-defineProps({
-  user: Object,
-});
 </script>
 
 <template>

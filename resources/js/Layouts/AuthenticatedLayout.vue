@@ -49,6 +49,13 @@ const showingNavigationDropdown = ref(false);
                 >
                   Categorias
                 </NavLink>
+                <NavLink
+                  v-if="$page.props.auth.rol.roles[0] === 'Admin'"
+                  :href="route('product.home')"
+                  :active="route().current('product.home')"
+                >
+                  Productos
+                </NavLink>
               </div>
             </div>
 

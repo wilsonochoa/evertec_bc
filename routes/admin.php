@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 
 use Inertia\Inertia;
 
@@ -45,4 +46,21 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/categoryupdate/{category}', [CategoryController::class, 'update'])
     ->middleware('can:admin.update')->name('category.update');
+
+    //Products
+
+    Route::get('/lstproducts', [ProductController::class, 'index'])->middleware('can:admin.home')
+    ->name('product.home');
+
+    Route::get('/createproduct', [ProductController::class, 'create'])->middleware('can:admin.home')
+    ->name('product.create');
+
+    Route::post('/productstore', [ProductController::class, 'store'])->middleware('can:admin.home')
+    ->name('product.store');
+
+    Route::get('/editproduct/{product}', [ProductController::class, 'edit'])->middleware('can:admin.home')
+    ->name('product.edit');
+
+    Route::patch('/productupdate/{product}', [ProductController::class, 'update'])->middleware('can:admin.home')
+    ->name('product.update');
 });

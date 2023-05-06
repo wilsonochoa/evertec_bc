@@ -38,7 +38,7 @@ class CategoryController extends Controller
             $responseStatus = $category->save();
             $responseData = 'Categoría actualizada';
         } catch (\Exception $e) {
-            $responseData = 'Error al actualizar el usuario';
+            $responseData = 'Error al actualizar la categoria';
             Log::error($e->getMessage(), ['context' => 'Updating category status']);
         }
 

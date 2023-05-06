@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\CategoryController;
+use App\Http\Controllers\Api\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::name('.categories')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::patch('/categories/toggle-status', [CategoryController::class, 'toggleStatus'])->name('.toggleStatus');
+});
+
+Route::name('.product')->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::patch('/products/toggle-status', [ProductController::class, 'toggleStatus'])->name('.toggleStatus');
 });

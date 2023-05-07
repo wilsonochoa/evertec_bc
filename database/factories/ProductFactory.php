@@ -28,7 +28,7 @@ class ProductFactory extends Factory
             'name' => fake()->domainName(),
             'description' => fake()->sentence(100),
             'slug' => fake()->slug(),
-            'image' => "products_images/JEWOMiYELlcdzsXkJuzHhbUMTphEVispTZJpUUdK.jpg",
+            'image' => "products_images/0bO1rUsjcBMrbO5DsCKUpmuo6nRPW8sDamLSiWwh.jpg",
             'price' => fake()->randomNumber(4),
             'quantity' => fake()->randomNumber(2),
             'status' => '1',

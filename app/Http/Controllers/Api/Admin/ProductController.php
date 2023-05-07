@@ -35,6 +35,7 @@ class ProductController extends Controller
         )
             ->when($filter, static function ($q) use ($filter) {
                 $q->where('products.name', 'like', '%' . $filter . '%');
+                $q->where('products.description', 'like', '%' . $filter . '%');
             })
             ->when($category, static function ($q) use ($category) {
                 $q->where('category_id', $category);

@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------

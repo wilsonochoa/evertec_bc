@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\Api\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,5 @@ Route::name('.categories')->group(function () {
 Route::name('.product')->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
     Route::patch('/products/toggle-status', [ProductController::class, 'toggleStatus'])->name('.toggleStatus');
+    Route::get('/productscustomer', [HomeController::class, 'index'])->name('.home');
 });

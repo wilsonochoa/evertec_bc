@@ -141,7 +141,7 @@ const submit = () => {
               </div>
 
               <div class="flex items-center justify-end mt-4">
-                <Link :href="route('admin.home')" class="ml-4">Regresar </Link>
+                <Link :href="route('product.home')" class="ml-4">Regresar </Link>
                 <PrimaryButton
                   class="ml-4"
                   :class="{ 'opacity-25': form.processing }"

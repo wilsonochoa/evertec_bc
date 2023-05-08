@@ -72,6 +72,11 @@ loadCategories();
                   </tr>
                 </tbody>
               </table>
+              <Pagination
+                class="mt-6"
+                :links="categories.links"
+                :click="loadCategories"
+              />
             </div>
           </div>
         </div>

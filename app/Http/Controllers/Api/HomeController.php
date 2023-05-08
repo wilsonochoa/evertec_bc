@@ -30,7 +30,7 @@ class HomeController extends Controller
             'price',
             'quantity',
             'categories.name as category'
-        )
+        )->where('products.status', 1)
             ->when($filter, static function ($q) use ($filter) {
                 $q->where('products.name', 'like', '%' . $filter . '%')
                 ->orWhere('products.description', 'like', '%' . $filter . '%');

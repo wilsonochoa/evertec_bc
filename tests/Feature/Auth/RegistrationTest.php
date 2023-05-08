@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+
 class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
@@ -22,8 +23,10 @@ class RegistrationTest extends TestCase
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'email_verified_at' => now(),
             'password' => 'password',
             'password_confirmation' => 'password',
+            'status' => '1',
         ]);
 
         $this->assertAuthenticated();

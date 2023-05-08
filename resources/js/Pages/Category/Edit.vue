@@ -50,7 +50,7 @@ const submit = () => {
               </div>
               <div class="flex items-center justify-end mt-4">
                 <Link
-                    :href="route('admin.home')"
+                    :href="route('category.home')"
                     class="ml-4"
                 >Regresar
                 </Link>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-
+use App\Actions\Admin\Product\DisableProductsByCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ToggleStatusRequest as RequestsToggleStatusRequest;
 use App\Http\Traits\ApiController;
@@ -37,6 +37,8 @@ class CategoryController extends Controller
             }
             $responseStatus = $category->save();
             $responseData = 'Categoría actualizada';
+            $params = ['category_id' => $category->id, 'status' => $category->status];
+            DisableProductsByCategory::execute($params);
         } catch (\Exception $e) {
             $responseData = 'Error al actualizar la categoria';
             Log::error($e->getMessage(), ['context' => 'Updating category status']);

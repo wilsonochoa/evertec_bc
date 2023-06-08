@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-
+use App\Domain\Products\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\ApiController;
-use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
     use ApiController;
 
     /**
@@ -32,8 +30,8 @@ class HomeController extends Controller
             'categories.name as category'
         )->where('products.status', 1)
             ->when($filter, static function ($q) use ($filter) {
-                $q->where('products.name', 'like', '%' . $filter . '%')
-                ->orWhere('products.description', 'like', '%' . $filter . '%');
+                $q->where('products.name', 'like', '%'.$filter.'%')
+                ->orWhere('products.description', 'like', '%'.$filter.'%');
             })
             ->when($category, static function ($q) use ($category) {
                 $q->where('category_id', $category);

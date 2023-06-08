@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Models\User;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateCategoryTest extends TestCase
@@ -16,7 +15,7 @@ class UpdateCategoryTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->adminUser = User::factory()->create()->assignRole('Admin');
+        $this->adminUser = User::factory()->create()->assignRole('User');
     }
 
     public function test_customer_can_not_access_form(): void
@@ -38,7 +37,7 @@ class UpdateCategoryTest extends TestCase
     {
         $newData = [
             'name' => fake()->name(),
-            'status' => '1'
+            'status' => '1',
         ];
         $response = $this->actingAs($this->adminUser)->put(route('category.update', 1), $newData);
         $response->assertSessionHas('success');

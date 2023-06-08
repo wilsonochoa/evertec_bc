@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Admin\Dashboard;
 
-use App\Models\User;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ShowDashboardTest extends TestCase
@@ -22,7 +21,7 @@ class ShowDashboardTest extends TestCase
 
     public function test_admin_can_access_dashboard(): void
     {
-        $user = User::factory()->create()->assignRole('Admin');
+        $user = User::factory()->create()->assignRole('User');
 
         $response = $this->actingAs($user)->get(route('dashboard'));
 

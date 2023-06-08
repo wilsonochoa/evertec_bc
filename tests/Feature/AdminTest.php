@@ -2,11 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
 class AdminTest extends TestCase
@@ -15,7 +13,7 @@ class AdminTest extends TestCase
 
     public function test_dashboard_page_is_displayed(): void
     {
-        $user = User::factory()->create()->assignRole('Admin');
+        $user = User::factory()->create()->assignRole('User');
 
         $response = $this
             ->actingAs($user)
@@ -25,7 +23,7 @@ class AdminTest extends TestCase
 
     public function test_customers_page_is_displayed(): void
     {
-        $user = User::factory()->create()->assignRole('Admin');
+        $user = User::factory()->create()->assignRole('User');
         $response = $this
             ->actingAs($user)
             ->get('/lstuser');
@@ -35,7 +33,7 @@ class AdminTest extends TestCase
 
     public function test_customers_pagination_is_displayed(): void
     {
-        $user = User::factory()->create()->assignRole('Admin');
+        $user = User::factory()->create()->assignRole('User');
         $response = $this
             ->actingAs($user)
             ->get('/lstuser?page=2');
@@ -45,7 +43,7 @@ class AdminTest extends TestCase
 
     public function test_customers_update_is_displayed(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('Admin');
+        $userAdmin = User::factory()->create()->assignRole('User');
 
         $response = $this
             ->actingAs($userAdmin)
@@ -56,7 +54,7 @@ class AdminTest extends TestCase
 
     public function test_customers_update_is_displayed_failed(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('Admin');
+        $userAdmin = User::factory()->create()->assignRole('User');
 
         $response = $this
             ->actingAs($userAdmin)
@@ -67,7 +65,7 @@ class AdminTest extends TestCase
 
     public function test_customers_toggle_status(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('Admin');
+        $userAdmin = User::factory()->create()->assignRole('User');
 
         $response = $this
             ->actingAs($userAdmin)
@@ -79,7 +77,7 @@ class AdminTest extends TestCase
 
     public function test_customers_toggle_status_failed(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('Admin');
+        $userAdmin = User::factory()->create()->assignRole('User');
 
         $response = $this
             ->actingAs($userAdmin)
@@ -90,14 +88,13 @@ class AdminTest extends TestCase
 
     public function test_customers_update(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('Admin');
-
+        $userAdmin = User::factory()->create()->assignRole('User');
 
         $randomName = $this->faker->name();
 
         $response = $this
             ->actingAs($userAdmin)
-            ->put('/updateuserprocess/3', ["name" => $randomName]);
+            ->put('/updateuserprocess/3', ['name' => $randomName]);
 
         $response->assertStatus(302);
         $response->assertRedirect('/lstuser');

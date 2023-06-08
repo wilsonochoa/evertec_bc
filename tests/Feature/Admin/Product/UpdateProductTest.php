@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Models\Category;
-use App\Models\User;
+use App\Domain\Categories\Models\Category;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
@@ -18,7 +17,7 @@ class UpdateProductTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->adminUser = User::factory()->create()->assignRole('Admin');
+        $this->adminUser = User::factory()->create()->assignRole('User');
     }
 
     public function test_customer_can_not_access_form(): void
@@ -45,7 +44,7 @@ class UpdateProductTest extends TestCase
             'price' => fake()->randomNumber(4),
             'quantity' => fake()->randomNumber(4),
             'category_id' => Category::first()->id,
-            'image' => null
+            'image' => null,
         ];
         $response = $this->actingAs($this->adminUser)->patch(route('product.update', 1), $newData);
         $response->assertSessionHas('success');
@@ -61,7 +60,7 @@ class UpdateProductTest extends TestCase
             'price' => fake()->randomNumber(4),
             'quantity' => fake()->randomNumber(4),
             'category_id' => Category::first()->id,
-            'image' => UploadedFile::fake()->image('product_image.png', 640, 480)
+            'image' => UploadedFile::fake()->image('product_image.png', 640, 480),
         ];
         $response = $this->actingAs($this->adminUser)->patch(route('product.update', 1), $newData);
         $response->assertSessionHas('success');

@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Models\User;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
@@ -17,7 +16,7 @@ class ToggleCategoryStatusTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->adminUser = User::factory()->create()->assignRole('Admin');
+        $this->adminUser = User::factory()->create()->assignRole('User');
     }
 
     public function test_toggle_status(): void

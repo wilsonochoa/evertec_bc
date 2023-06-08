@@ -15,7 +15,7 @@ class CreateCategoryTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->adminUser = User::factory()->create()->assignRole('User');
+        $this->adminUser = User::factory()->create()->assignRole('Admin');
     }
 
     public function test_customer_can_not_access_form(): void

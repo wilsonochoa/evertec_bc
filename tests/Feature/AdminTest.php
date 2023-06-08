@@ -11,21 +11,26 @@ class AdminTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    private User $adminUser;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->adminUser = User::factory()->create()->assignRole('Admin');
+    }
+
     public function test_dashboard_page_is_displayed(): void
     {
-        $user = User::factory()->create()->assignRole('User');
-
         $response = $this
-            ->actingAs($user)
+            ->actingAs($this->adminUser)
             ->get('/dashboard');
         $response->assertStatus(200);
     }
 
     public function test_customers_page_is_displayed(): void
     {
-        $user = User::factory()->create()->assignRole('User');
         $response = $this
-            ->actingAs($user)
+            ->actingAs($this->adminUser)
             ->get('/lstuser');
 
         $response->assertStatus(200);
@@ -33,9 +38,8 @@ class AdminTest extends TestCase
 
     public function test_customers_pagination_is_displayed(): void
     {
-        $user = User::factory()->create()->assignRole('User');
         $response = $this
-            ->actingAs($user)
+            ->actingAs($this->adminUser)
             ->get('/lstuser?page=2');
 
         $response->assertStatus(200);
@@ -43,10 +47,8 @@ class AdminTest extends TestCase
 
     public function test_customers_update_is_displayed(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('User');
-
         $response = $this
-            ->actingAs($userAdmin)
+            ->actingAs($this->adminUser)
             ->get('/updateuser/3');
 
         $response->assertStatus(200);
@@ -54,10 +56,8 @@ class AdminTest extends TestCase
 
     public function test_customers_update_is_displayed_failed(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('User');
-
         $response = $this
-            ->actingAs($userAdmin)
+            ->actingAs($this->adminUser)
             ->get('/updateuser/999');
 
         $response->assertStatus(404);
@@ -65,30 +65,19 @@ class AdminTest extends TestCase
 
     public function test_customers_toggle_status(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('User');
-
-        $response = $this
-            ->actingAs($userAdmin)
-            ->patch('/toggleuserstatus', ['id' => 3]);
-
-        $response->assertStatus(200);
-        $response->assertJson(['status' => true]);
+        $response = $this->actingAs($this->adminUser)->patch(route('api.customers.toggleStatus'), ['id' => 1]);
+        $response->assertOk()->assertJson(['status' => true]);
     }
 
     public function test_customers_toggle_status_failed(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('User');
-
-        $response = $this
-            ->actingAs($userAdmin)
-            ->patch('/toggleuserstatus', ['id' => 9999]);
-
-        $response->assertStatus(302);
+        $response = $this->actingAs($this->adminUser)->patch(route('api.customers.toggleStatus'), ['id' => 9999]);
+        $response->assertFound();
     }
 
     public function test_customers_update(): void
     {
-        $userAdmin = User::factory()->create()->assignRole('User');
+        $userAdmin = User::factory()->create()->assignRole('Admin');
 
         $randomName = $this->faker->name();
 

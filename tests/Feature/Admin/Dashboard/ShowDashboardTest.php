@@ -21,7 +21,7 @@ class ShowDashboardTest extends TestCase
 
     public function test_admin_can_access_dashboard(): void
     {
-        $user = User::factory()->create()->assignRole('User');
+        $user = User::factory()->create()->assignRole('Admin');
 
         $response = $this->actingAs($user)->get(route('dashboard'));
 

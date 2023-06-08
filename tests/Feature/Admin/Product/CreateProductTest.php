@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Models\Product;
-use App\Models\User;
+use App\Domain\Products\Models\Product;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateProductTest extends TestCase
@@ -39,7 +38,7 @@ class CreateProductTest extends TestCase
     public function test_save_product(): void
     {
         $newProduct = Product::factory()->make()->attributesToArray();
-        $newProduct['status'] = "1";
+        $newProduct['status'] = '1';
         $newProduct['image'] = UploadedFile::fake()->image('product_image.png', 640, 480);
 
         $response = $this->actingAs($this->adminUser)->post(route('product.store'), $newProduct);

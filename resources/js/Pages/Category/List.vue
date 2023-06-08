@@ -1,8 +1,8 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Pagination from "@/Components/Pagination.vue";
-import { Head, Link, usePage } from "@inertiajs/vue3";
-import { ref } from "vue";
+import {Head} from "@inertiajs/vue3";
+import {ref} from "vue";
 
 const props = defineProps({
     title: String

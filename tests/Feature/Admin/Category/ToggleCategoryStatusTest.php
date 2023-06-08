@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Models\User;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 

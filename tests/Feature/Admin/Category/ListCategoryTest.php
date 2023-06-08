@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Admin\Category;
 
-use App\Models\User;
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ListCategoryTest extends TestCase
@@ -36,13 +35,13 @@ class ListCategoryTest extends TestCase
 
     public function test_pagination(): void
     {
-        $response = $this->actingAs($this->adminUser)->getJson(route('api.categories') . '?page=2');
+        $response = $this->actingAs($this->adminUser)->getJson(route('api.categories').'?page=2');
         $response->assertOk();
     }
 
     public function test_search(): void
     {
-        $response = $this->actingAs($this->adminUser)->getJson(route('api.categories') . '?filter=and');
+        $response = $this->actingAs($this->adminUser)->getJson(route('api.categories').'?filter=and');
         $response->assertOk();
     }
 }

@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\Web\User\CategoryController;
+use App\Http\Controllers\Web\User\ProductController;
+use App\Http\Controllers\Web\User\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +17,15 @@ use App\Http\Controllers\Admin\ProductController;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/lstuser', [UserController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
 
-    Route::get('/lstuser', [AdminController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
-
-    Route::get('/updateuser/{user}', [AdminController::class, 'updateUser'])
+    Route::get('/updateuser/{user}', [UserController::class, 'updateUser'])
         ->name('admin.update');
 
-    Route::patch('/toggleuserstatus', [AdminController::class, 'toggleStatus'])
+    Route::patch('/toggleuserstatus', [UserController::class, 'toggleStatus'])
         ->middleware('can:admin.update')->name('admin.toggleUserStatus');
 
-    Route::put('/updateuserprocess/{user}', [AdminController::class, 'updateUserProcess'])
+    Route::put('/updateuserprocess/{user}', [UserController::class, 'updateUserProcess'])
         ->middleware('can:admin.update')->name('admin.updateProcess');
 
     //Category

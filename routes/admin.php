@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\ProductController as HomeProduct;
 use App\Http\Controllers\Web\User\CategoryController;
 use App\Http\Controllers\Web\User\ProductController;
 use App\Http\Controllers\Web\User\UserController;
@@ -60,4 +62,8 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/productupdate/{product}', [ProductController::class, 'update'])->middleware('can:admin.home')
     ->name('product.update');
+
+    Route::get('/products/detail/{slug}', [HomeProduct::class, 'show'])->name('product-detail');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
 });

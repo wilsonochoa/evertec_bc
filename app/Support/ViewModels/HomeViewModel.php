@@ -2,7 +2,7 @@
 
 namespace App\Support\ViewModels;
 
-use App\Domain\Categories\Models\Category;
+use App\Domain\Categories\Models\Order;
 use App\Domain\Products\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +18,7 @@ class HomeViewModel extends ViewModel
         return [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'categories' => Category::where('status', '1')->get(),
+            'categories' => Order::where('status', '1')->get(),
         ];
     }
 }

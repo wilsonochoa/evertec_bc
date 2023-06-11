@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin\Product;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -43,7 +43,7 @@ class UpdateProductTest extends TestCase
             'status' => 1,
             'price' => fake()->randomNumber(4),
             'quantity' => fake()->randomNumber(4),
-            'category_id' => Order::first()->id,
+            'category_id' => Category::first()->id,
             'image' => null,
         ];
         $response = $this->actingAs($this->adminUser)->patch(route('product.update', 1), $newData);
@@ -59,7 +59,7 @@ class UpdateProductTest extends TestCase
             'status' => 0,
             'price' => fake()->randomNumber(4),
             'quantity' => fake()->randomNumber(4),
-            'category_id' => Order::first()->id,
+            'category_id' => Category::first()->id,
             'image' => UploadedFile::fake()->image('product_image.png', 640, 480),
         ];
         $response = $this->actingAs($this->adminUser)->patch(route('product.update', 1), $newData);

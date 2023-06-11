@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web\User;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 use App\Domain\Categories\ViewModels\EditViewModel;
 use App\Domain\Categories\ViewModels\ListViewModel;
 use App\Http\Controllers\Controller;
@@ -34,7 +34,7 @@ class CategoryController extends Controller
     public function store(CreateCategoryPostRequest $request): \Illuminate\Http\RedirectResponse
     {
         $params = $request->validated();
-        if (Order::create($params)) {
+        if (Category::create($params)) {
             session()->flash('success', 'Categoría creada correctamente!');
         } else {
             session()->flash('error', 'Error al crear la categoría');
@@ -46,7 +46,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $category): \Inertia\Response
+    public function edit(Category $category): \Inertia\Response
     {
         return Inertia::render('Category/Edit', new EditViewModel($category));
     }
@@ -54,7 +54,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Order $category, UpdateCategoryPostRequest $request): \Illuminate\Http\RedirectResponse
+    public function update(Category $category, UpdateCategoryPostRequest $request): \Illuminate\Http\RedirectResponse
     {
         $params = $request->validated();
         if ($category->update($params)) {

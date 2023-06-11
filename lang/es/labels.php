@@ -8,4 +8,7 @@ return [
     'save' => 'Guardar',
     'subtotal' => 'Subtotal',
     'total' => 'Total',
+    'stock_error' => 'La cantidad seleccionada supera las existencias',
+    'yes' => 'Si',
+    'no' => 'No',
 ];

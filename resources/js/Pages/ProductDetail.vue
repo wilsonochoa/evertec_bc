@@ -12,7 +12,7 @@ defineProps({
     product: Object,
     category: Object
 });
-
+const showStockError = ref(false);
 const product = usePage().props.product;
 
 const amount = ref(1);
@@ -20,18 +20,31 @@ const showAlert = ref(false);
 
 const store = useCartStore();
 
-const addToCart = () => {
+const addToCart = async () => {
     if (amount.value < 1) {
         return;
     }
-    store.add(product.id, amount.value);
-    showAlert.value = true;
-    setTimeout(() => showAlert.value = false, 2000);
+
+    if(amount.value > product.quantity){
+        showStockError.value = true;
+        setTimeout(() => showStockError.value = false, 5000);
+        return;
+    }
+    
+    let result = await store.add(product.id, amount.value);
+    if(result){
+        showAlert.value = true;
+        setTimeout(() => showAlert.value = false, 2000);
+    }else{
+        showStockError.value = true;
+        setTimeout(() => showStockError.value = false, 5000);
+    }
+
 }
 </script>
 
 <template>
-    <Head title="Bienvenido"/>
+    <Head title="Detalle producto"/>
 
     <div>
         <div class="flex p-4 border-b-2 justify-between items-center">
@@ -70,6 +83,10 @@ const addToCart = () => {
                 <button class="btn btn-outline ml-1" @click="addToCart">
                     <i class="fa fa-cart-plus"></i>&nbsp;
                 </button>
+            </div>
+            <p>Disponibles: {{ product.quantity }}</p>
+            <div v-if="showStockError" class="alert alert-warning w-2/4 mt-2">
+                {{ $page.props.$t.labels.stock_error }}
             </div>
         </div>
     </div>

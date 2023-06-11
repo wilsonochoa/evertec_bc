@@ -36,7 +36,7 @@ const removeProduct = () => {
 }
 
 const increase = async (productId) => {
-    var result = await store.add(productId, 1);
+    let result = await store.add(productId, 1);
     if(!result){
         showStockError.value = true;
         setTimeout(() => showStockError.value = false, 5000);

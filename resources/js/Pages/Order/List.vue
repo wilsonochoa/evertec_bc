@@ -24,7 +24,7 @@ loadOrders();
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Listar Clientes
+                {{ $page.props.$t.orders.plural_title }}
             </h2>
         </template>
         <div class="py-12">
@@ -36,18 +36,22 @@ loadOrders();
                                 <thead>
                                 <tr>
                                     <th>C&oacute;digo</th>
-                                    <th>Estado</th>
                                     <th>Total</th>
                                     <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="order in orders.data">
                                     <td>{{ order.code }}</td>
                                     <td>$ {{ order.total_price.toLocaleString('es-CO') }}</td>
-                                    <td>{{ order.created_at }}</td>
+                                    <td>{{ new Date(order.created_at).toLocaleString('es-CO') }}</td>
                                     <td>
-                                        <a class="btn btn-active btn-primary">{{ order.status }}</a>
+                                        {{ $page.props.$t.orders.status[order.status] }}
+                                    </td>
+                                    <td>
+                                        <a :href="route('orders.show', order.id)" class="btn btn-active btn-primary"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -60,6 +64,9 @@ loadOrders();
                         </div>
                     </div>
                 </div>
+            </div>
+            <div v-else class="text-center">
+                {{ $page.props.$t.orders.no_records }}
             </div>
         </div>
     </AuthenticatedLayout>

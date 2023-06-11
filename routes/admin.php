@@ -64,13 +64,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/productupdate/{product}', [ProductController::class, 'update'])->middleware('can:admin.home')
     ->name('product.update');
 
-    Route::get('/products/detail/{slug}', [HomeProduct::class, 'show'])->name('product-detail');
+    Route::get('/products/detail/{slug}', [HomeProduct::class, 'show'])->middleware('can:customer.orders')
+        ->name('product-detail');
 
-    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart')->middleware('can:customer.orders');
 
-    Route::resource('orders', OrderController::class)->only('show');
+    Route::resource('orders', OrderController::class)->middleware('can:customer.orders')->only('show');
 
-    //TODO cambiar para cliente
-    Route::get('/orders', [OrderController::class, 'index'])->middleware('can:admin.home')
+    Route::get('/orders', [OrderController::class, 'index'])->middleware('can:customer.orders')
         ->name('order.index');
 });

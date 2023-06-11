@@ -8,12 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Order\CreateApiRequest;
 use App\Http\Resources\Api\StandardResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function getOrders()
     {
-        return response()->json(new StandardResource(Order::latest('id')->paginate(5)));
+        return response()->json(new StandardResource(Order::where('user_id', Auth::id())->latest('id')->paginate(5)));
     }
 
     public function store(CreateApiRequest $request): JsonResponse

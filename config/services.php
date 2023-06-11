@@ -33,7 +33,7 @@ return [
 
     'placetopay' => [
         'login' => env('PLACETOPAY_LOGIN'),
-        'tranKey' => env('PLACETOPAY_TRANKEY'),
+        'secret_key' => env('PLACETOPAY_SECRET_KEY'),
         'baseUrl' => env('PLACETOPAY_BASE_URL'),
         'timeout' => env('PLACETOPAY_TIMEOUT'),
     ],

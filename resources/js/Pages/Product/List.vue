@@ -36,7 +36,7 @@ const loadProducts = (url = null) => {
 const searchProducts = () => {
   axios
     .get(
-      `${route("api.product")}/?filter=${searchTerm.value}&category=${
+      `${route("api.product.index")}/?filter=${searchTerm.value}&category=${
         category.value
       }`
     )

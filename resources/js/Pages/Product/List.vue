@@ -1,8 +1,8 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Pagination from "@/Components/Pagination.vue";
-import { Head, Link, usePage } from "@inertiajs/vue3";
-import { ref } from "vue";
+import {Head} from "@inertiajs/vue3";
+import {ref} from "vue";
 import Select from "@/Components/Select.vue";
 
 const props = defineProps({
@@ -24,7 +24,7 @@ const toggleStatus = (e) => {
 
 const loadProducts = (url = null) => {
   axios
-    .get(url || route("api.product"))
+    .get(url || route("api.product.index"))
     .then((response) => {
       products.value = response.data.data;
     })
@@ -36,7 +36,7 @@ const loadProducts = (url = null) => {
 const searchProducts = () => {
   axios
     .get(
-      `${route("api.product")}/?filter=${searchTerm.value}&category=${
+      `${route("api.product.index")}/?filter=${searchTerm.value}&category=${
         category.value
       }`
     )

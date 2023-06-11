@@ -29,12 +29,13 @@ const showingNavigationDropdown = ref(false);
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <NavLink
-                  :href="route('dashboard')"
-                  :active="route().current('dashboard')"
-                >
-                  Dashboard
-                </NavLink>
+                  <NavLink
+                      v-if="$page.props.auth.rol.roles[0] === 'Customer'"
+                      :href="route('order.index')"
+                      :active="route().current('order.index')"
+                  >
+                      Pedidos
+                  </NavLink>
                 <NavLink
                   v-if="$page.props.auth.rol.roles[0] === 'Admin'"
                   :href="route('admin.home')"

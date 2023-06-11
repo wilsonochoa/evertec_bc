@@ -35,13 +35,13 @@ class ListProductTest extends TestCase
 
     public function test_pagination(): void
     {
-        $response = $this->actingAs($this->adminUser)->getJson(route('api.product').'?page=2');
+        $response = $this->actingAs($this->adminUser)->getJson(route('api.product.index').'?page=2');
         $response->assertOk();
     }
 
     public function test_search(): void
     {
-        $response = $this->actingAs($this->adminUser)->getJson(route('api.product').'?filter=and&category=1');
+        $response = $this->actingAs($this->adminUser)->getJson(route('api.product.index').'?filter=and&category=1');
         $response->assertOk();
     }
 }

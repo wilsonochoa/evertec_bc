@@ -12,8 +12,10 @@ defineProps({
 });
 
 const store = useCartStore();
-
+const showStockError = ref(false);
 const products = ref([]);
+const productToDelete = ref(null);
+
 const loadProducts = () => {
     axios.post(route('api.getCartProducts'), {ids: Object.keys(store.products)})
         .then((response) => {
@@ -22,7 +24,6 @@ const loadProducts = () => {
 }
 loadProducts();
 
-const productToDelete = ref(null);
 const showModal = (productId) => {
     removeProductModal.showModal();
     productToDelete.value = productId;
@@ -34,8 +35,12 @@ const removeProduct = () => {
     removeProductModal.close();
 }
 
-const increase = (productId) => {
-    store.add(productId, 1);
+const increase = async (productId) => {
+    var result = await store.add(productId, 1);
+    if(!result){
+        showStockError.value = true;
+        setTimeout(() => showStockError.value = false, 5000);
+    }
 }
 
 const decrease = (productId) => {
@@ -65,13 +70,20 @@ const createOrder = () => {
 
     axios.post(route('api.orders.store'), {products})
         .then((e) => {
-
-            if (e.data.clear_cart) {
+            const resp = e.data;
+            if (resp.data.clear_cart) {
                 store.clear();
             }
 
-            if (e.data.route) {
-                window.location.href = e.data.route;
+            if (resp.data.set_max_amounts) {
+                showStockError.value = true;
+                setTimeout(() => showStockError.value = false, 5000);
+
+                for (const product of products.value) {
+                    store.set(product.id, product.quantity);
+                }
+            } else if (resp.data.route) {
+                window.location.href = resp.data.route;
             }
         })
         .catch((e) => console.log(e));
@@ -96,6 +108,10 @@ const createOrder = () => {
         <h2 class="w-full text-center p-5 uppercase">{{ $page.props.$t.cart.title }}</h2>
     </div>
 
+    <div v-if="showStockError" class="alert alert-info w-full md:w-2/4 xl:w-1/4 mx-auto">
+        {{ $page.props.$t.cart.stock_reset }}
+    </div>
+
     <template v-if="store.amount > 0">
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 px-4 ">
 
@@ -107,6 +123,7 @@ const createOrder = () => {
                 </figure>
                 <div class="card-body">
                     <h2 class="card-title"><a :href="route('product-detail', product.slug)">{{ product.name }}</a></h2>
+                    <h3>Disponibles: {{ product.quantity }}</h3>
                     <h3>{{ $page.props.$t.products.unit_price }}: ${{ product.price.toLocaleString('es-CO') }}</h3>
                     <div class="flex items-center ">
                         <button class="btn" @click="decrease(product.id)"><i class="fa fa-minus"></i></button>

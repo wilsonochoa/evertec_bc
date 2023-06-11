@@ -2,7 +2,7 @@
 
 namespace App\Domain\Products\ViewModels;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 use App\Support\ViewModels\ViewModel;
 
 class ProductDetailViewModel extends ViewModel
@@ -11,7 +11,7 @@ class ProductDetailViewModel extends ViewModel
     {
         return [
             'product' => $this->model,
-            'category' => Order::find($this->model->category_id),
+            'category' => Category::find($this->model->category_id),
         ];
     }
 }

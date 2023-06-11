@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\User;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 use App\Domain\Products\Actions\DisableProductsByCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Category\ToggleStatusRequest as RequestsToggleStatusRequest;
@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index(): array
     {
-        $categories = Order::latest('id')->paginate(5);
+        $categories = Category::latest('id')->paginate(5);
 
         return $this->response($categories);
     }
@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $params = $request->validated();
         $responseStatus = false;
         try {
-            $category = Order::find($params['id']);
+            $category = Category::find($params['id']);
 
             if ($category->status == 1) {
                 $category->status = 0;

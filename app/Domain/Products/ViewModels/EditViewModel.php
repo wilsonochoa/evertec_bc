@@ -2,7 +2,7 @@
 
 namespace App\Domain\Products\ViewModels;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 
 class EditViewModel extends \App\Support\ViewModels\ViewModel
 {
@@ -11,7 +11,7 @@ class EditViewModel extends \App\Support\ViewModels\ViewModel
         return [
             'title' => 'Editar producto',
             'product' => $this->model,
-            'categories' => Order::where('status', 1)->get(),
+            'categories' => Category::where('status', 1)->get(),
         ];
     }
 }

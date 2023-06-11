@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -12,6 +12,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Order::factory()->count(20)->create();
+        Category::factory()->count(20)->create();
     }
 }

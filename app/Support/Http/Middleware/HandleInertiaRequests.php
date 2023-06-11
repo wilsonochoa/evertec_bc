@@ -55,8 +55,9 @@ class HandleInertiaRequests extends Middleware
                 'labels' => __('labels'),
                 'products' => __('products'),
                 'cart' => __('cart'),
-                /*'fields' => __('fields'),
-                'products' => __('products'),
+                'fields' => __('fields'),
+                'orders' => __('orders'),
+                /*'products' => __('products'),
                 'customers' => __('customers'),
                 'categories' => __('categories'),
                 'cart' => __('cart'),*/

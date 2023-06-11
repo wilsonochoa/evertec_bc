@@ -6,6 +6,7 @@ use App\Domain\Orders\Models\Order;
 use App\Domain\Products\Models\Product;
 use App\Support\Actions\Action;
 use App\Support\Definitions\OrderStatus;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -16,9 +17,10 @@ class StoreOrder implements Action
         $ids = array_column($params, 'id');
         $products = Product::select('id', 'quantity', 'price', 'status')->whereIn('id', $ids)->get();
 
-        //TODO: validar cantidades
-
-        // calcular valor total
+        $stockErrors = self::validateStock($products, $params);
+        if ($stockErrors) {
+            return false;
+        }
         $total = 0;
         foreach ($products as $product) {
             $total += $product->price;
@@ -52,7 +54,23 @@ class StoreOrder implements Action
                 'quantity' => $quantity,
                 'total' => $quantity * $product->price,
             ];
+            $product->quantity -= $quantity;
+            $product->save();
         }
+
         $order->products()->sync($productsData);
+    }
+
+    private static function validateStock(Collection $products, array $params): bool
+    {
+        $error = false;
+        foreach ($products as $product) {
+            if ($params[$product->id]['amount'] > $product->quantity) {
+                $error = true;
+                break;
+            }
+        }
+
+        return $error;
     }
 }

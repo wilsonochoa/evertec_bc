@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 use App\Domain\Products\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +33,7 @@ class ProductFactory extends Factory
             'price' => fake()->randomNumber(4),
             'quantity' => fake()->randomNumber(2),
             'status' => '1',
-            'category_id' => fake()->randomElement(Order::all())['id'],
+            'category_id' => fake()->randomElement(Category::all())['id'],
         ];
     }
 }

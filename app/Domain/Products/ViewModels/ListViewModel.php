@@ -2,7 +2,7 @@
 
 namespace App\Domain\Products\ViewModels;
 
-use App\Domain\Categories\Models\Order;
+use App\Domain\Categories\Models\Category;
 use App\Domain\Products\Models\Product;
 
 class ListViewModel extends \App\Support\ViewModels\ViewModel
@@ -16,7 +16,7 @@ class ListViewModel extends \App\Support\ViewModels\ViewModel
     {
         return [
             'title' => 'Productos',
-            'categories' => Order::where('status', 1)->get(),
+            'categories' => Category::where('status', 1)->get(),
         ];
     }
 }

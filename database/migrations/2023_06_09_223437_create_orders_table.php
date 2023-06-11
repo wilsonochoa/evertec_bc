@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('code', 16);
             $table->string('status', 45);
             $table->double('total_price');
-            $table->string('delivery_address', 255);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

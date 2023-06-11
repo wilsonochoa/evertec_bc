@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\ProductController as HomeProduct;
 use App\Http\Controllers\Web\User\CategoryController;
 use App\Http\Controllers\Web\User\ProductController;
@@ -66,4 +67,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/detail/{slug}', [HomeProduct::class, 'show'])->name('product-detail');
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+    Route::resource('orders', OrderController::class)->only('show');
+
+    //TODO cambiar para cliente
+    Route::get('/orders', [OrderController::class, 'index'])->middleware('can:admin.home')
+        ->name('order.index');
 });

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\OrderController;
+use App\Http\Controllers\Web\ProductController as HomeProduct;
+use App\Http\Controllers\Web\User\CategoryController;
+use App\Http\Controllers\Web\User\ProductController;
+use App\Http\Controllers\Web\User\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +20,15 @@ use App\Http\Controllers\Admin\ProductController;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/lstuser', [UserController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
 
-    Route::get('/lstuser', [AdminController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
-
-    Route::get('/updateuser/{user}', [AdminController::class, 'updateUser'])
+    Route::get('/updateuser/{user}', [UserController::class, 'updateUser'])
         ->name('admin.update');
 
-    Route::patch('/toggleuserstatus', [AdminController::class, 'toggleStatus'])
+    Route::patch('/toggleuserstatus', [UserController::class, 'toggleStatus'])
         ->middleware('can:admin.update')->name('admin.toggleUserStatus');
 
-    Route::put('/updateuserprocess/{user}', [AdminController::class, 'updateUserProcess'])
+    Route::put('/updateuserprocess/{user}', [UserController::class, 'updateUserProcess'])
         ->middleware('can:admin.update')->name('admin.updateProcess');
 
     //Category
@@ -62,4 +63,14 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/productupdate/{product}', [ProductController::class, 'update'])->middleware('can:admin.home')
     ->name('product.update');
+
+    Route::get('/products/detail/{slug}', [HomeProduct::class, 'show'])->middleware('can:customer.orders')
+        ->name('product-detail');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart')->middleware('can:customer.orders');
+
+    Route::resource('orders', OrderController::class)->middleware('can:customer.orders')->only('show');
+
+    Route::get('/orders', [OrderController::class, 'index'])->middleware('can:customer.orders')
+        ->name('order.index');
 });

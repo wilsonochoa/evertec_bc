@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Api\Product;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Domain\Users\Models\User;
 use Tests\TestCase;
 
 class ListProductsTest extends TestCase
@@ -13,7 +11,7 @@ class ListProductsTest extends TestCase
     {
         $user = User::factory()->create()->assignRole('Customer');
 
-        $response = $this->actingAs($user)->get(route('api.product.home') .'?filter=and&category=1');
+        $response = $this->actingAs($user)->get(route('api.product.home').'?filter=and&category=1');
         $response->assertOk();
     }
 }

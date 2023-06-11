@@ -225,7 +225,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"EditViewModel.php.html#7\">App\\ViewModels\\Admin\\Category\\EditViewModel<\/a>"],[100,2,"<a href=\"ListViewModel.php.html#8\">App\\ViewModels\\Admin\\Category\\ListViewModel<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"EditViewModel.php.html#7\">App\\Domain\\Categories\\ViewModels\\EditViewModel<\/a>"],[100,2,"<a href=\"ListViewModel.php.html#8\">App\\Domain\\Categories\\ViewModels\\ListViewModel<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -249,7 +249,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"EditViewModel.php.html#9\">App\\ViewModels\\Admin\\Category\\EditViewModel::toArray<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#10\">App\\ViewModels\\Admin\\Category\\ListViewModel::__construct<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#15\">App\\ViewModels\\Admin\\Category\\ListViewModel::toArray<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"EditViewModel.php.html#9\">App\\Domain\\Categories\\ViewModels\\EditViewModel::toArray<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#10\">App\\Domain\\Categories\\ViewModels\\ListViewModel::__construct<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#15\">App\\Domain\\Categories\\ViewModels\\ListViewModel::toArray<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

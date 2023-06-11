@@ -225,7 +225,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,2,"<a href=\"CreateViewModel.php.html#9\">App\\ViewModels\\Admin\\Product\\CreateViewModel<\/a>"],[100,1,"<a href=\"EditViewModel.php.html#9\">App\\ViewModels\\Admin\\Product\\EditViewModel<\/a>"],[100,2,"<a href=\"ListViewModel.php.html#9\">App\\ViewModels\\Admin\\Product\\ListViewModel<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,2,"<a href=\"CreateViewModel.php.html#9\">App\\Domain\\Products\\ViewModels\\CreateViewModel<\/a>"],[100,1,"<a href=\"EditViewModel.php.html#9\">App\\Domain\\Products\\ViewModels\\EditViewModel<\/a>"],[100,2,"<a href=\"ListViewModel.php.html#9\">App\\Domain\\Products\\ViewModels\\ListViewModel<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -249,7 +249,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"CreateViewModel.php.html#11\">App\\ViewModels\\Admin\\Product\\CreateViewModel::__construct<\/a>"],[100,1,"<a href=\"CreateViewModel.php.html#16\">App\\ViewModels\\Admin\\Product\\CreateViewModel::toArray<\/a>"],[100,1,"<a href=\"EditViewModel.php.html#11\">App\\ViewModels\\Admin\\Product\\EditViewModel::toArray<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#11\">App\\ViewModels\\Admin\\Product\\ListViewModel::__construct<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#16\">App\\ViewModels\\Admin\\Product\\ListViewModel::toArray<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"CreateViewModel.php.html#11\">App\\Domain\\Products\\ViewModels\\CreateViewModel::__construct<\/a>"],[100,1,"<a href=\"CreateViewModel.php.html#16\">App\\Domain\\Products\\ViewModels\\CreateViewModel::toArray<\/a>"],[100,1,"<a href=\"EditViewModel.php.html#11\">App\\Domain\\Products\\ViewModels\\EditViewModel::toArray<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#11\">App\\Domain\\Products\\ViewModels\\ListViewModel::__construct<\/a>"],[100,1,"<a href=\"ListViewModel.php.html#16\">App\\Domain\\Products\\ViewModels\\ListViewModel::toArray<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

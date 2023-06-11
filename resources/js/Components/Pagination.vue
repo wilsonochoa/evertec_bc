@@ -1,5 +1,5 @@
 <template>
-    <div v-if="links.length > 3">
+    <div v-if="links !== undefined && links.length > 3">
         <div class="flex flex-wrap mt-8 justify-center">
             <template v-for="(link, key) in links" :key="key">
                 <div
@@ -24,7 +24,8 @@
 </template>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
+
 const props = defineProps({
     links: Array,
     filter: String,

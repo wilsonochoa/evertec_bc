@@ -74,7 +74,7 @@
       </tr>
 
       <tr>
-       <td class="warning"><abbr title="App\Http\Controllers\Admin\CategoryController">CategoryController</abbr></td>
+       <td class="warning"><abbr title="App\Http\Controllers\Web\User\CategoryController">CategoryController</abbr></td>
        <td class="warning big">       <div class="progress">
          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="84.62" aria-valuemin="0" aria-valuemax="100" style="width: 84.62%">
            <span class="sr-only">84.62% covered (warning)</span>
@@ -169,7 +169,7 @@
       </tr>
 
       <tr>
-       <td class="success">&nbsp;<a href="#49"><abbr title="edit(App\Models\Category $category): Inertia\Response">edit</abbr></a></td>
+       <td class="success">&nbsp;<a href="#49"><abbr title="edit(App\Domain\Categories\Models\Category $category): Inertia\Response">edit</abbr></a></td>
        <td class="success big">       <div class="progress">
          <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100.00" aria-valuemin="0" aria-valuemax="100" style="width: 100.00%">
            <span class="sr-only">100.00% covered (success)</span>
@@ -191,7 +191,7 @@
       </tr>
 
       <tr>
-       <td class="warning">&nbsp;<a href="#57"><abbr title="update(App\Models\Category $category, App\Http\Requests\UpdateCategoryPostRequest $request): Illuminate\Http\RedirectResponse">update</abbr></a></td>
+       <td class="warning">&nbsp;<a href="#57"><abbr title="update(App\Domain\Categories\Models\Category $category, App\Http\Requests\UpdateCategoryPostRequest $request): Illuminate\Http\RedirectResponse">update</abbr></a></td>
        <td class="warning big">       <div class="progress">
          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="80.00" aria-valuemin="0" aria-valuemax="100" style="width: 80.00%">
            <span class="sr-only">80.00% covered (warning)</span>
@@ -226,9 +226,9 @@
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="6" href="#6">6</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">Inertia\Inertia</span><span class="keyword">;</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="7" href="#7">7</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\Http\Requests\CreateCategoryPostRequest</span><span class="keyword">;</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="8" href="#8">8</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\Http\Requests\UpdateCategoryPostRequest</span><span class="keyword">;</span></td></tr>
-    <tr class=" d-flex"><td  class="col-1 text-right"><a id="9" href="#9">9</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\ViewModels\Admin\Category\ListViewModel</span><span class="keyword">;</span></td></tr>
-    <tr class=" d-flex"><td  class="col-1 text-right"><a id="10" href="#10">10</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\Models\Category</span><span class="keyword">;</span></td></tr>
-    <tr class=" d-flex"><td  class="col-1 text-right"><a id="11" href="#11">11</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\ViewModels\Admin\Category\EditViewModel</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-right"><a id="9" href="#9">9</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\Domain\Categories\ViewModels\ListViewModel</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-right"><a id="10" href="#10">10</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\Domain\Categories\Models\Category</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-right"><a id="11" href="#11">11</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">App\Domain\Categories\ViewModels\EditViewModel</span><span class="keyword">;</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="12" href="#12">12</a></td><td class="col-11 codeLine"></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="13" href="#13">13</a></td><td class="col-11 codeLine"><span class="keyword">class</span><span class="default">&nbsp;</span><span class="default">CategoryController</span><span class="default">&nbsp;</span><span class="keyword">extends</span><span class="default">&nbsp;</span><span class="default">Controller</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="14" href="#14">14</a></td><td class="col-11 codeLine"><span class="keyword">{</span></td></tr>

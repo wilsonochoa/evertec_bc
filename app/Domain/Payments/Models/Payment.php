@@ -2,9 +2,13 @@
 
 namespace App\Domain\Payments\Models;
 
+use App\Domain\Orders\Models\Order;
 use App\Support\Definitions\PaymentStatus;
+use Database\Factories\PaymentFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $request_id
@@ -16,4 +20,14 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     use HasFactory;
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'id');
+    }
+
+    protected static function newFactory(): Factory
+    {
+        return PaymentFactory::new();
+    }
 }

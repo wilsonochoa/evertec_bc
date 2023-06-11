@@ -30,7 +30,7 @@ class OrderController extends Controller
     public function show(Order $order, PaymentFactory $paymentFactory): Response|RedirectResponse
     {
         if ($order->user_id !== Auth::id()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('products.customer');
         }
         $payment = GetOrderPayments::execute(['order_id' => $order->id]);
         if ($payment) {

@@ -7,7 +7,7 @@ use App\Support\Actions\Action;
 
 class UpdatePaymentStatus implements Action
 {
-    public static function execute(array $params): bool
+    public static function execute(array $params): bool|int
     {
         return Payment::where('id', $params['id'])->update(['status' => $params['status']]);
     }

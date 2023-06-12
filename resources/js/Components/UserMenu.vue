@@ -1,10 +1,18 @@
 <script setup>
 import DropdownLink from "@/Components/DropdownLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
+import {useCartStore} from "@/Stores/CartStore";
+
+const store = useCartStore();
 
 defineProps({
     canRegister: Boolean
 });
+
+const clearStorage = () => {
+    store.clear();
+};
+
 </script>
 
 <template>
@@ -44,7 +52,7 @@ defineProps({
                                   v-if="$page.props.auth.rol.roles[0] === 'Customer'"> Pedidos
                     </DropdownLink>
                     <DropdownLink :href="route('profile.edit')"> Perfil</DropdownLink>
-                    <DropdownLink :href="route('logout')" method="post" as="button">
+                    <DropdownLink :href="route('logout')" method="post" as="button" @click="clearStorage">
                         Cerrar sesión
                     </DropdownLink>
                 </template>

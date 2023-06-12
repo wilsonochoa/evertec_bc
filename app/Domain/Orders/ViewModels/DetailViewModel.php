@@ -2,6 +2,7 @@
 
 namespace App\Domain\Orders\ViewModels;
 
+use App\Domain\Orders\Models\Order;
 use App\Domain\Payments\Models\Payment;
 use App\Support\Definitions\OrderStatus;
 use App\Support\Definitions\PaymentStatus;
@@ -14,9 +15,14 @@ class DetailViewModel extends ViewModel
         $newPayment = false;
         $currentPaymentUrl = false;
 
-        if ($this->model->status === OrderStatus::CREATED->value) {
+        /**
+         * @var Order $model
+         */
+        $model = $this->model();
+
+        if ($model->status === OrderStatus::CREATED->value) {
             $payment = Payment::select('id', 'status', 'process_url')
-                ->where('order_id', $this->model->id)
+                ->where('order_id', $model->id)
                 ->orderBy('id', 'desc')->first();
 
             if ($payment) {
@@ -33,11 +39,9 @@ class DetailViewModel extends ViewModel
             }
         }
 
-        // usar enlace existente cuando orden creada y pago creado
-
         return [
-            'order' => $this->model,
-            'products' => $this->model->products,
+            'order' => $model,
+            'products' => $model->products,
             'status' => OrderStatus::toArray(),
             'newPayment' => $newPayment,
             'currentPaymentUrl' => $currentPaymentUrl,

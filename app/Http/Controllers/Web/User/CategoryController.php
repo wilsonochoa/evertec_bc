@@ -40,13 +40,13 @@ class CategoryController extends Controller
             session()->flash('error', 'Error al crear la categoría');
         }
 
-        return redirect()->route('category.home');
+        return redirect()->route('categories.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category): \Inertia\Response
+    public function show(Category $category): \Inertia\Response
     {
         return Inertia::render('Category/Edit', new EditViewModel($category));
     }
@@ -63,6 +63,6 @@ class CategoryController extends Controller
             session()->flash('error', 'Error al actualizar la categoría');
         }
 
-        return redirect()->route('category.home');
+        return redirect()->route('categories.index');
     }
 }

@@ -34,7 +34,7 @@ loadCategories();
     </template>
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-2">
-        <a class="btn btn-active btn-primary" :href="route('category.create')"
+        <a class="btn btn-active btn-primary" :href="route('categories.create')"
           >Crear categoria</a>
       </div>
 
@@ -56,7 +56,7 @@ loadCategories();
                     <td>
                       <a
                         class="btn btn-active btn-primary"
-                        :href="route('category.edit', category.id)"
+                        :href="route('categories.show', category.id)"
                         >Actualizar</a
                       >
                     </td>

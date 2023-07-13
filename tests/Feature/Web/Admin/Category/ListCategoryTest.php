@@ -22,14 +22,14 @@ class ListCategoryTest extends TestCase
     {
         $user = User::factory()->create()->assignRole('Customer');
 
-        $response = $this->actingAs($user)->get(route('category.home'));
+        $response = $this->actingAs($user)->get(route('categories.index'));
 
         $response->assertStatus(403);
     }
 
     public function test_admin_access_list(): void
     {
-        $response = $this->actingAs($this->adminUser)->get(route('category.home'));
+        $response = $this->actingAs($this->adminUser)->get(route('categories.index'));
         $response->assertOk();
     }
 

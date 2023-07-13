@@ -49,7 +49,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product): \Inertia\Response
+    public function show(Product $product): \Inertia\Response
     {
         return Inertia::render('Product/Edit', new EditViewModel($product));
     }

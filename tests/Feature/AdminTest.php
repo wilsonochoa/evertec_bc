@@ -31,7 +31,7 @@ class AdminTest extends TestCase
     {
         $response = $this
             ->actingAs($this->adminUser)
-            ->get('/lstuser');
+            ->get('/user');
 
         $response->assertStatus(200);
     }
@@ -40,7 +40,7 @@ class AdminTest extends TestCase
     {
         $response = $this
             ->actingAs($this->adminUser)
-            ->get('/lstuser?page=2');
+            ->get('/user?page=2');
 
         $response->assertStatus(200);
     }
@@ -49,7 +49,7 @@ class AdminTest extends TestCase
     {
         $response = $this
             ->actingAs($this->adminUser)
-            ->get('/updateuser/3');
+            ->get('/update/user/3');
 
         $response->assertStatus(200);
     }
@@ -58,7 +58,7 @@ class AdminTest extends TestCase
     {
         $response = $this
             ->actingAs($this->adminUser)
-            ->get('/updateuser/999');
+            ->get('/update/user/999');
 
         $response->assertStatus(404);
     }
@@ -83,10 +83,10 @@ class AdminTest extends TestCase
 
         $response = $this
             ->actingAs($userAdmin)
-            ->put('/updateuserprocess/3', ['name' => $randomName]);
+            ->put('/update/user/3', ['name' => $randomName]);
 
         $response->assertStatus(302);
-        $response->assertRedirect('/lstuser');
+        $response->assertRedirect('/user');
 
         $this->assertEquals($randomName, User::find(3)->name);
     }

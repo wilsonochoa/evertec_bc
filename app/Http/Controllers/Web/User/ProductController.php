@@ -43,7 +43,7 @@ class ProductController extends Controller
             session()->flash('error', 'Error al crear el producto');
         }
 
-        return redirect()->route('product.home');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -68,7 +68,7 @@ class ProductController extends Controller
             session()->flash('error', 'Error al actualizar el producto');
         }
 
-        return redirect()->route('product.home');
+        return redirect()->route('products.index');
     }
 
     private function setImage(array $requestParams, Product $product): string

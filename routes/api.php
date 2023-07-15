@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::name('.product')->group(function () {
         Route::get('/products', [ProductController::class, 'index'])->name('.index');
         Route::patch('/products/toggle-status', [ProductController::class, 'toggleStatus'])->name('.toggleStatus');
-        Route::get('/productscustomer', [HomeController::class, 'index'])->name('.home');
+        Route::get('/products-customer', [HomeController::class, 'index'])->name('.home');
     });
 });
 

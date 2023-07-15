@@ -83,7 +83,7 @@ loadProducts();
           </form>
         </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-2">
-          <a class="btn btn-active btn-primary" :href="route('product.create')"
+          <a class="btn btn-active btn-primary" :href="route('products.create')"
             >Crear producto</a
           >
         </div>
@@ -126,7 +126,7 @@ loadProducts();
                     <td>
                       <a
                         class="btn btn-active btn-primary"
-                        :href="route('product.edit', product.id)"
+                        :href="route('products.show', product.id)"
                         >Actualizar</a
                       >
                     </td>

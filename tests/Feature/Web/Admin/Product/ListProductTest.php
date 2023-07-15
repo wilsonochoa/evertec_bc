@@ -22,14 +22,14 @@ class ListProductTest extends TestCase
     {
         $user = User::factory()->create()->assignRole('Customer');
 
-        $response = $this->actingAs($user)->get(route('product.home'));
+        $response = $this->actingAs($user)->get(route('products.index'));
 
         $response->assertStatus(403);
     }
 
     public function test_admin_access_list(): void
     {
-        $response = $this->actingAs($this->adminUser)->get(route('product.home'));
+        $response = $this->actingAs($this->adminUser)->get(route('products.index'));
         $response->assertOk();
     }
 

@@ -4,7 +4,7 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { Head, Link, usePage, useForm } from "@inertiajs/vue3";
+import {Head, Link, useForm, usePage} from "@inertiajs/vue3";
 
 defineProps({
     title: String,
@@ -16,7 +16,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route('category.update', category.id));
+    form.put(route('categories.update', category.id));
 };
 </script>
 
@@ -50,7 +50,7 @@ const submit = () => {
               </div>
               <div class="flex items-center justify-end mt-4">
                 <Link
-                    :href="route('category.home')"
+                    :href="route('categories.index')"
                     class="ml-4"
                 >Regresar
                 </Link>

@@ -22,14 +22,14 @@ class UpdateCategoryTest extends TestCase
     {
         $user = User::factory()->create()->assignRole('Customer');
 
-        $response = $this->actingAs($user)->get(route('category.edit', 1));
+        $response = $this->actingAs($user)->get(route('categories.show', 1));
 
         $response->assertStatus(403);
     }
 
     public function test_admin_access_form(): void
     {
-        $response = $this->actingAs($this->adminUser)->get(route('category.edit', 1));
+        $response = $this->actingAs($this->adminUser)->get(route('categories.show', 1));
         $response->assertOk();
     }
 
@@ -39,8 +39,8 @@ class UpdateCategoryTest extends TestCase
             'name' => fake()->name(),
             'status' => '1',
         ];
-        $response = $this->actingAs($this->adminUser)->put(route('category.update', 1), $newData);
+        $response = $this->actingAs($this->adminUser)->put(route('categories.update', 1), $newData);
         $response->assertSessionHas('success');
-        $response->assertRedirect(route('category.home'));
+        $response->assertRedirect(route('categories.index'));
     }
 }

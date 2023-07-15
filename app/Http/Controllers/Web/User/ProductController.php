@@ -43,13 +43,13 @@ class ProductController extends Controller
             session()->flash('error', 'Error al crear el producto');
         }
 
-        return redirect()->route('product.home');
+        return redirect()->route('products.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product): \Inertia\Response
+    public function show(Product $product): \Inertia\Response
     {
         return Inertia::render('Product/Edit', new EditViewModel($product));
     }
@@ -68,7 +68,7 @@ class ProductController extends Controller
             session()->flash('error', 'Error al actualizar el producto');
         }
 
-        return redirect()->route('product.home');
+        return redirect()->route('products.index');
     }
 
     private function setImage(array $requestParams, Product $product): string

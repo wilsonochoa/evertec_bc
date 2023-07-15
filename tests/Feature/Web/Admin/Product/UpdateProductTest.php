@@ -24,14 +24,14 @@ class UpdateProductTest extends TestCase
     {
         $user = User::factory()->create()->assignRole('Customer');
 
-        $response = $this->actingAs($user)->get(route('product.edit', 1));
+        $response = $this->actingAs($user)->get(route('products.show', 1));
 
         $response->assertStatus(403);
     }
 
     public function test_admin_access_form(): void
     {
-        $response = $this->actingAs($this->adminUser)->get(route('product.edit', 1));
+        $response = $this->actingAs($this->adminUser)->get(route('products.show', 1));
         $response->assertOk();
     }
 
@@ -46,9 +46,9 @@ class UpdateProductTest extends TestCase
             'category_id' => Category::first()->id,
             'image' => null,
         ];
-        $response = $this->actingAs($this->adminUser)->patch(route('product.update', 1), $newData);
+        $response = $this->actingAs($this->adminUser)->patch(route('products.update', 1), $newData);
         $response->assertSessionHas('success');
-        $response->assertRedirect(route('product.home'));
+        $response->assertRedirect(route('products.index'));
     }
 
     public function test_update_product_with_image(): void
@@ -62,8 +62,8 @@ class UpdateProductTest extends TestCase
             'category_id' => Category::first()->id,
             'image' => UploadedFile::fake()->image('product_image.png', 640, 480),
         ];
-        $response = $this->actingAs($this->adminUser)->patch(route('product.update', 1), $newData);
+        $response = $this->actingAs($this->adminUser)->patch(route('products.update', 1), $newData);
         $response->assertSessionHas('success');
-        $response->assertRedirect(route('product.home'));
+        $response->assertRedirect(route('products.index'));
     }
 }

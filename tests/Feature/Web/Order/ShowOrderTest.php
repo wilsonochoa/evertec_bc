@@ -60,7 +60,7 @@ class ShowOrderTest extends TestCase
             );
     }
 
-    public function test_view_order_wit_payment_created(): void
+    public function test_view_order_whit_payment_created(): void
     {
         $order = Order::factory()->create(['user_id' => $this->customerUser->id]);
         Payment::factory()->for($order)->create();

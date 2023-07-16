@@ -51,7 +51,7 @@ class ProductController extends Controller
         try {
             $product = Product::find($params['id']);
 
-            if ($product->status == 1) {
+            if ($product->status === 1) {
                 $product->status = 0;
             } else {
                 $product->status = 1;

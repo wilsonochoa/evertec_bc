@@ -13,4 +13,5 @@ return [
     'no' => 'No',
     'import' => 'Importar',
     'download' => 'Descargar',
+    'export' => 'Exportar',
 ];

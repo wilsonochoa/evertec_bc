@@ -12,4 +12,5 @@ return [
     'no' => 'No',
     'import' => 'Import',
     'download' => 'Download',
+    'export' => 'Export',
 ];

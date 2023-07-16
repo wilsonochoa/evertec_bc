@@ -19,4 +19,6 @@ return [
     'import_started' => 'Import process has been started.',
     'import_successfully' => 'Product import process completed successfully',
     'import_error' => 'An error occurred while importing products.',
+    'export_started' => "The export process has been started, you will receive an email with the download link when it's completed",
+    'export_success' => 'Products export process completed successfully',
 ];

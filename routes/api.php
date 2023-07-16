@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/sanctum/token', [ProductController::class, 'getToken']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
@@ -35,6 +36,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/products/toggle-status', [ProductController::class, 'toggleStatus'])->name('.toggleStatus');
         Route::get('/products-customer', [HomeController::class, 'index'])->name('.home');
     });
+
+    Route::post('/products', [ProductController::class, 'store'])->name('.products.store');
+    Route::get('/products/show/{id}', [ProductController::class, 'show'])->name('.products.show');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('.products.update');
 });
 
 Route::name('.categories')->group(function () {

@@ -24,8 +24,6 @@ class ProductImportJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    private int $categoryId;
-
     private const HEADERS = [
         'nombre' => 0,
         'descripcion' => 1,

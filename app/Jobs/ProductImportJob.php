@@ -26,11 +26,12 @@ class ProductImportJob implements ShouldQueue
 
     private const HEADERS = [
         'nombre' => 0,
-        'descripcion' => 1,
-        'precio' => 2,
+        'precio' => 1,
+        'descripcion' => 2,
         'cantidad' => 3,
         'estado' => 4,
         'categoria' => 5,
+        'id' => 6,
     ];
 
     public function __construct(private readonly string $filePath, private readonly User $user)
@@ -76,16 +77,22 @@ class ProductImportJob implements ShouldQueue
     private function processRow(array $row): void
     {
         $quantity = (int) $row[self::HEADERS['cantidad']];
+        $id = -1;
+
+        if (array_key_exists(self::HEADERS['id'], $row) && is_numeric($row[self::HEADERS['id']])) {
+            $id = $row[self::HEADERS['id']];
+        }
 
         $status = match (strtolower(trim($row[self::HEADERS['estado']]))) {
             'activo' => GeneralStatus::ACTIVE->value,
             'inactivo' => GeneralStatus::INACTIVE->value,
-            default => throw new UnsupportedStatus(__('categories.error_status_update'))
+            default => throw new UnsupportedStatus(__('El estado no existe '.trim($row[self::HEADERS['estado']])))
         };
 
         Product::query()->updateOrCreate([
-            'slug' => Str::slug($row[self::HEADERS['nombre']], '-', 'es'),
+            'id' => $id,
         ], [
+            'slug' => Str::slug($row[self::HEADERS['nombre']], '-', 'es'),
             'name' => $row[self::HEADERS['nombre']],
             'price' => $row[self::HEADERS['precio']],
             'description' => $row[self::HEADERS['descripcion']],

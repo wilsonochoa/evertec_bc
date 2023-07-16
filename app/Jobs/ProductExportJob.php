@@ -39,6 +39,7 @@ class ProductExportJob implements ShouldQueue
             'cantidad',
             'estado',
             'categoría',
+            'id',
         ];
 
         $fileName = 'export_productos.csv';
@@ -64,6 +65,7 @@ class ProductExportJob implements ShouldQueue
                     $headers[3] => $product->quantity,
                     $headers[4] => $status,
                     $headers[5] => $product->category->name,
+                    $headers[6] => $product->id,
                 ]);
             }
         });
@@ -76,7 +78,7 @@ class ProductExportJob implements ShouldQueue
                 url(Storage::disk('public')->url('exports/'.$fileName))
             ))->subject(__('products.export'))
         );
-        logger()->info('Proceso de exportación de productos finalizado'.url(Storage::disk('public')->url('exports/'.$fileName)));
+        logger()->info('Proceso de exportación de productos finalizado');
     }
 
     private function createFile(string $fileName): void

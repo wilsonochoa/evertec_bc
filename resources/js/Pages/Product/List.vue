@@ -83,13 +83,18 @@ loadProducts();
                     </form>
                 </div>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-2">
-                    <a class="btn btn-active btn-primary" :href="route('products.create')"
-                    >Crear producto</a>
+                    <a class="btn btn-active btn-primary" :href="route('products.create')">Crear producto</a>
                     <a
                         :href="route('products.import')"
                         class="btn btn-primary ml-1"
                     >
                         {{ $page.props.$t.labels.import }}
+                    </a>
+                    <a
+                        :href="route('products.export')"
+                        class="btn btn-primary ml-1"
+                    >
+                        {{ $page.props.$t.labels.export }}
                     </a>
                 </div>
             </div>

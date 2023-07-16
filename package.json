@@ -18,7 +18,7 @@
         "vue": "^3.3.0"
     },
     "dependencies": {
-        "daisyui": "^3.0.3",
+        "daisyui": "3.2.1",
         "pinia": "^2.1.3"
     }
 }

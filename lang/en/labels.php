@@ -8,4 +8,8 @@ return [
     'save' => 'Save',
     'subtotal' => 'Subtotal',
     'total' => 'Total',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'import' => 'Import',
+    'download' => 'Download',
 ];

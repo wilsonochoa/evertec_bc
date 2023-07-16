@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\ProductController as HomeProduct;
 use App\Http\Controllers\Web\User\CategoryController;
 use App\Http\Controllers\Web\User\ProductController;
+use App\Http\Controllers\Web\User\ProductImportController;
 use App\Http\Controllers\Web\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,10 @@ Route::middleware('auth')->group(function () {
         ->middleware('can:admin.categories')->except(['destroy']);
 
     //Products
+    Route::get('/products/import', [ProductImportController::class, 'index'])
+        ->middleware('can:admin.products')->name('products.import');
+
+    Route::post('/products/import', [ProductImportController::class, 'store'])->name('products.import.process');
 
     Route::resource('products', ProductController::class)
         ->middleware('can:admin.products')->except(['destroy']);

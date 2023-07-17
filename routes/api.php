@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController as HomeProductController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\User\CategoryController;
 use App\Http\Controllers\Api\User\ProductController;
 use App\Http\Controllers\Api\User\UserController;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/sanctum/token', [ProductController::class, 'getToken']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
@@ -33,9 +35,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::name('.product')->group(function () {
         Route::get('/products', [ProductController::class, 'index'])->name('.index');
         Route::patch('/products/toggle-status', [ProductController::class, 'toggleStatus'])->name('.toggleStatus');
-        Route::get('/productscustomer', [HomeController::class, 'index'])->name('.home');
+        Route::get('/products-customer', [HomeController::class, 'index'])->name('.home');
     });
+
+    Route::post('/products', [ProductController::class, 'store'])->name('.products.store');
+    Route::get('/products/show/{id}', [ProductController::class, 'show'])->name('.products.show');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('.products.update');
 });
+
+Route::post('/reports', [ReportController::class, 'getReports'])->name('.reports');
 
 Route::name('.categories')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);

@@ -6,7 +6,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Select from "@/Components/Select.vue";
 import FileInput from "@/Components/FileInput.vue";
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import {Head, Link, useForm, usePage} from "@inertiajs/vue3";
 
 defineProps({
   title: String,
@@ -28,7 +28,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('product.update', product.id),{
+    form.post(route('products.update', product.id),{
         forceFormData: true
     });
 };
@@ -132,7 +132,7 @@ const submit = () => {
               </div>
 
               <div class="flex items-center justify-end mt-4">
-                <Link :href="route('product.home')" class="ml-4">Regresar </Link>
+                <Link :href="route('products.index')" class="ml-4">Regresar </Link>
                 <PrimaryButton
                   class="ml-4"
                   :class="{ 'opacity-25': form.processing }"

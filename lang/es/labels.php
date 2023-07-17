@@ -11,4 +11,7 @@ return [
     'stock_error' => 'La cantidad seleccionada supera las existencias',
     'yes' => 'Si',
     'no' => 'No',
+    'import' => 'Importar',
+    'download' => 'Descargar',
+    'export' => 'Exportar',
 ];

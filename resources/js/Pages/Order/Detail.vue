@@ -37,8 +37,11 @@ const token = document.getElementById('_token').value;
 
         <div v-for="product in order.products" class="flex mx-auto items-center pr-4">
             <div class="card card-compact w-96 bg-base-100 shadow-xl">
-                <figure>
+                <figure v-if="product.image !== '' ">
                     <img :src="`/storage/${product.image}`" :alt="product.name" />
+                </figure>
+                <figure v-else>
+                    <img :src="`/images/default.jpg`" :alt="product.name" />
                 </figure>
                 <div class="card-body">
                     <h2 class="card-title"><a :href="route('product-detail', product.slug)">{{ product.name }}</a></h2>

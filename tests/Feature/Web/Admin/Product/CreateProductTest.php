@@ -24,14 +24,14 @@ class CreateProductTest extends TestCase
     {
         $user = User::factory()->create()->assignRole('Customer');
 
-        $response = $this->actingAs($user)->get(route('product.create'));
+        $response = $this->actingAs($user)->get(route('products.create'));
 
         $response->assertStatus(403);
     }
 
     public function test_admin_access_form(): void
     {
-        $response = $this->actingAs($this->adminUser)->get(route('product.create'));
+        $response = $this->actingAs($this->adminUser)->get(route('products.create'));
         $response->assertOk();
     }
 
@@ -41,8 +41,8 @@ class CreateProductTest extends TestCase
         $newProduct['status'] = '1';
         $newProduct['image'] = UploadedFile::fake()->image('product_image.png', 640, 480);
 
-        $response = $this->actingAs($this->adminUser)->post(route('product.store'), $newProduct);
+        $response = $this->actingAs($this->adminUser)->post(route('products.store'), $newProduct);
         $response->assertSessionHas('success');
-        $response->assertRedirect(route('product.home'));
+        $response->assertRedirect(route('products.index'));
     }
 }

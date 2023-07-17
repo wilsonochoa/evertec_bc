@@ -19,13 +19,13 @@ class AdminTest extends TestCase
         $this->adminUser = User::factory()->create()->assignRole('Admin');
     }
 
-    public function test_dashboard_page_is_displayed(): void
+    /*public function test_dashboard_page_is_displayed(): void
     {
         $response = $this
             ->actingAs($this->adminUser)
             ->get('/dashboard');
         $response->assertStatus(200);
-    }
+    }*/
 
     public function test_customers_page_is_displayed(): void
     {

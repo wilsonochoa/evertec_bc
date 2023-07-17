@@ -2,6 +2,7 @@
 
 namespace Feature\Web\Admin\Dashboard;
 
+use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -9,7 +10,7 @@ class ShowDashboardTest extends TestCase
 {
     use RefreshDatabase;
 
-    /*public function test_user_can_access_home(): void
+    public function test_user_can_access_home(): void
     {
         $user = User::factory()->create()->assignRole('Customer');
 
@@ -34,5 +35,5 @@ class ShowDashboardTest extends TestCase
         $response = $this->actingAs($user)->get(route('dashboard'));
 
         $response->assertStatus(403);
-    }*/
+    }
 }

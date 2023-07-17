@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController as HomeProductController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\User\CategoryController;
 use App\Http\Controllers\Api\User\ProductController;
 use App\Http\Controllers\Api\User\UserController;
@@ -41,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/products/show/{id}', [ProductController::class, 'show'])->name('.products.show');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('.products.update');
 });
+
+Route::post('/reports', [ReportController::class, 'getReports'])->name('.reports');
 
 Route::name('.categories')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);

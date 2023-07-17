@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Domain\Categories\Models\Category;
 use App\Domain\Products\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Domain\Products\Models\Product>
@@ -20,10 +21,13 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+
+        $name = fake()->domainName();
+
         return [
-            'name' => fake()->domainName(),
+            'name' => $name,
             'description' => fake()->sentence(100),
-            'slug' => fake()->slug(),
+            'slug' => Str::slug($name, '-', 'es'),
             'image' => '',
             'price' => fake()->randomNumber(4),
             'quantity' => fake()->randomNumber(2),

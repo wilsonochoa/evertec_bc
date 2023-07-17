@@ -25,3 +25,7 @@ Check out the [Project definition](https://david-valbuena.notion.site/Reto-af876
 - php artisan! serve _or create a vhost in apache or nginx_
 - npm run dev
 
+## User Admin
+
+User: admin@gmail.com
+Password: 12345678

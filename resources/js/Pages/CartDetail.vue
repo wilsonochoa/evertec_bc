@@ -117,8 +117,12 @@ const createOrder = () => {
 
             <div v-for="product in products"
                  class="card card-side bg-base-100 drop-shadow-md  mx-auto my-1 w-full sm:w-3/4">
-                <figure style="object-fit: contain;">
+                <figure v-if="product.image !== '' " style="object-fit: contain;">
                     <img :src="`/storage/${product.image}`" class="drop-shadow-md mx-auto" :alt="product.name"
+                         style="width: 200px;"/>
+                </figure>
+                <figure v-else style="object-fit: contain;">
+                    <img :src="`/images/default.jpg`" class="drop-shadow-md mx-auto" :alt="product.name"
                          style="width: 200px;"/>
                 </figure>
                 <div class="card-body">

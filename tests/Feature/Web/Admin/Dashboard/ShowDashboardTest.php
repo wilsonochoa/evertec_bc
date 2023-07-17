@@ -28,12 +28,12 @@ class ShowDashboardTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_customer_can_access_dashboard(): void
+    public function test_customer_can_not_access_dashboard(): void
     {
         $user = User::factory()->create()->assignRole('Customer');
 
         $response = $this->actingAs($user)->get(route('dashboard'));
 
-        $response->assertOk();
+        $response->assertStatus(403);
     }
 }

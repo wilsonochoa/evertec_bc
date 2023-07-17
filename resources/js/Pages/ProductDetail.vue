@@ -30,7 +30,7 @@ const addToCart = async () => {
         setTimeout(() => showStockError.value = false, 5000);
         return;
     }
-    
+
     let result = await store.add(product.id, amount.value);
     if(result){
         showAlert.value = true;
@@ -61,10 +61,13 @@ const addToCart = async () => {
     </div>
 
     <div class="px-4 sm:columns-1 md:columns-2 ">
-
         <div class="mb-3">
-            <figure style="object-fit: contain;">
+            <figure v-if="product.image !== '' "  style="object-fit: contain;">
                 <img :src="`/storage/${product.image}`" class="max-w-full mx-auto" :alt="product.name"
+                     style="max-height: 720px;"/>
+            </figure>
+            <figure v-else   style="object-fit: contain;">
+                <img :src="`/images/default.jpg`" class="max-w-full mx-auto" :alt="product.name"
                      style="max-height: 720px;"/>
             </figure>
         </div>
